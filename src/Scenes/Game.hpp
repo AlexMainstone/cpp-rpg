@@ -2,6 +2,7 @@
 
 #include "Scene.hpp"
 
+#include "../Interface/Camera.hpp"
 #include "../World/TileMap.hpp"
 
 class Game : public Scene {
@@ -15,4 +16,5 @@ class Game : public Scene {
         sf::RenderWindow &window;
         SpriteSheet sheet;
         TileMap *map;
+        Camera *camera;
 };

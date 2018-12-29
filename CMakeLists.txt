@@ -23,6 +23,10 @@ set(SRC
     # World
     src/World/TileMap.hpp
     src/World/TileMap.cpp
+
+    # Interface
+    src/Interface/Camera.hpp
+    src/Interface/Camera.cpp
 )
 
 # Directories

@@ -19,7 +19,7 @@ SpriteSheet::SpriteSheet(const char *path, int tiles_wide, int tiles_tall) {
     sprite.setTextureRect(sf::IntRect(0, 0, tile_width, tile_height));
 }
 
-void SpriteSheet::draw(int tile, sf::Vector2f pos, sf::RenderWindow &window) {
+void SpriteSheet::draw(int tile, sf::Vector2f pos, sf::RenderTarget &target) {
     // Set the position in the world
     sprite.setPosition(pos);
 
@@ -29,5 +29,5 @@ void SpriteSheet::draw(int tile, sf::Vector2f pos, sf::RenderWindow &window) {
             tile_width, tile_height));
 
     // Draw
-    window.draw(sprite);
+    target.draw(sprite);
 }
