@@ -1,4 +1,4 @@
-#include "Game.hpp"
+#include "Scenes/Game.hpp"
 
 
 Game::Game(sf::RenderWindow &window) : window(window), sheet("../res/tilemap.png", 8, 15) {

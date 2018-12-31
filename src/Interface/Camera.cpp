@@ -1,4 +1,4 @@
-#include "Camera.hpp"
+#include "Interface/Camera.hpp"
 
 Camera::Camera(sf::View v) {
     view = v;
@@ -19,6 +19,10 @@ void Camera::handleEvent(sf::Event e) {
         }
     } else if(e.type == sf::Event::Resized) {
         view.setSize(e.size.width, e.size.height);
+    } else if(e.type == sf::Event::MouseWheelScrolled) {
+        if(e.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
+        } else {
+        }
     }
 }
 

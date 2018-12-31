@@ -11,7 +11,7 @@ An RPG written in C++
 Figure it out.
 
 ## TODO
-- [ ] Create an actually good cmake file
+- [x] Create an actually good cmake file
 - [ ] Write a better README.md
 - [ ] Implement unused library
 - [ ] Do some tests

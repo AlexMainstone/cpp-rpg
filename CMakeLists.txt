@@ -1,42 +1,75 @@
 cmake_minimum_required(VERSION 3.0)
 project(cpp-rpg)
 
-# Enable C++11
 set (CMAKE_CXX_STANDARD 11)
 
-# Statically Link SMFL
-#add_compile_definitions(SFML_STATIC)
-
-# Source
-set(SRC
-    src/Main.cpp
+# Header files
+list(APPEND HEADERS
+    "${CMAKE_SOURCE_DIR}/include/Scenes/Scene.hpp"
+    "${CMAKE_SOURCE_DIR}/include/Scenes/Game.hpp"
     
-    # Scenes
-    src/Scenes/Scene.hpp
-    src/Scenes/Game.hpp
-    src/Scenes/Game.cpp
+    "${CMAKE_SOURCE_DIR}/include/Resources/SpriteSheet.hpp"
+    
+    "${CMAKE_SOURCE_DIR}/include/World/TileMap.hpp"
+    
+    "${CMAKE_SOURCE_DIR}/include/Interface/Camera.hpp")
 
-    # Resources
-    src/Resources/SpriteSheet.hpp
-    src/Resources/SpriteSheet.cpp
+# Source Files
+list(APPEND SOURCES
+    "${CMAKE_SOURCE_DIR}/src/Main.cpp"
+    
+    "${CMAKE_SOURCE_DIR}/src/Scenes/Game.cpp"
+    
+    "${CMAKE_SOURCE_DIR}/src/Resources/SpriteSheet.cpp"
+    
+    "${CMAKE_SOURCE_DIR}/src/World/TileMap.cpp"
+    
+    "${CMAKE_SOURCE_DIR}/src/Interface/Camera.cpp")
 
-    # World
-    src/World/TileMap.hpp
-    src/World/TileMap.cpp
+# Include Directories
+list(APPEND INCLUDE_DIRS
+    "${CMAKE_SOURCE_DIR}/lib/imgui"
+    "${CMAKE_SOURCE_DIR}/include"
+    "${CMAKE_SOURCE_DIR}/lib/imgui-sfml")
 
-    # Interface
-    src/Interface/Camera.hpp
-    src/Interface/Camera.cpp
-)
+source_group("Headers" FILES ${HEADERS})
+source_group("Sources" FILES ${SOURCES})
 
-# Directories
-set(SFML_DIR "lib/SFML-2.5.1/build")
+if (WIN32)
+    #set(SFML_STATIC_LIBRARIES TRUE)
+    set(SFML_DIR "${CMAKE_SOURCE_DIR}/lib/SFML-2.5.1/build")
+endif(WIN32)
 
-# Executable
-add_executable(cpp-rpg ${SRC})
+find_package(SFML 2 COMPONENTS graphics network audio REQUIRED)
 
-# SFML
-find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
+add_executable(cpp-rpg ${SOURCES} ${HEADERS})
 
-# Include & Link
-target_link_libraries(cpp-rpg sfml-graphics sfml-audio)
+if(MSVC)
+    target_compile_options(cpp-rpg PRIVATE /W4)
+else()
+    target_compile_options(cpp-rpg PRIVATE
+            -Wall
+            -Wextra # reasonable and standard
+            -Wshadow # warn the user if a variable declaration shadows one from a parent context
+            -Wnon-virtual-dtor # warn the user if a class with virtual functions has a non-virtual destructor. This helps catch hard to track down memory errors
+            -Wold-style-cast # warn for c-style casts
+            -Wcast-align # warn for potential performance problem casts
+            -Wunused # warn on anything being unused
+            -Woverloaded-virtual # warn if you overload (not override) a virtual function
+            -Wpedantic # warn if non-standard C++ is used
+            -Wconversion # warn on type conversions that may lose data
+            -Wsign-conversion # warn on sign conversions
+            -Wmisleading-indentation # warn if identation implies blocks where blocks do not exist
+            -Wduplicated-cond # warn if if / else chain has duplicated conditions
+            -Wduplicated-branches # warn if if / else branches have duplicated code
+            -Wlogical-op # warn about logical operations being used where bitwise were probably wanted
+            -Wnull-dereference # warn if a null dereference is detected
+            -Wuseless-cast # warn if you perform a cast to the same type
+            -Wdouble-promotion # warn if float is implicit promoted to double
+            -Wformat=2 # warn on security issues around functions that format output (ie printf)
+            -std=c++17
+            "$<$<CONFIG:DEBUG>:-DDEBUG>")
+endif()
+
+target_include_directories(cpp-rpg PRIVATE ${INCLUDE_DIRS})
+target_link_libraries(cpp-rpg PRIVATE sfml-graphics sfml-audio sfml-network)

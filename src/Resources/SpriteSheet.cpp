@@ -1,4 +1,4 @@
-#include "SpriteSheet.hpp"
+#include "Resources/SpriteSheet.hpp"
 
 
 SpriteSheet::SpriteSheet(const char *path, int tiles_wide, int tiles_tall) {

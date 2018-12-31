@@ -1,4 +1,4 @@
-#include "TileMap.hpp"
+#include "World/TileMap.hpp"
 #include <stdlib.h>
 
 TileMap::TileMap(SpriteSheet &sheet) : sheet(sheet) {
