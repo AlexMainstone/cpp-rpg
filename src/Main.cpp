@@ -23,7 +23,7 @@ int main() {
             scene->handleEvent(e);
         }
 
-        scene->update(clock.restart().asSeconds());
+        scene->update(clock.restart());
 
         window.clear(sf::Color(20, 20, 20));
         // draw

@@ -1,0 +1,9 @@
+{
+    "files.exclude": {
+        ".vscode": true,
+        "**/build": true,
+        "**/lib": true,
+        "**/res": true,
+        "**/README.md": true
+    }
+}

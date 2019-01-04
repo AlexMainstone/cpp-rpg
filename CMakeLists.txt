@@ -12,7 +12,10 @@ list(APPEND HEADERS
     
     "${CMAKE_SOURCE_DIR}/include/World/TileMap.hpp"
     
-    "${CMAKE_SOURCE_DIR}/include/Interface/Camera.hpp")
+    "${CMAKE_SOURCE_DIR}/include/Interface/Camera.hpp"
+
+    "${CMAKE_SOURCE_DIR}/include/Interface/Console.hpp"
+)
 
 # Source Files
 list(APPEND SOURCES
@@ -24,7 +27,10 @@ list(APPEND SOURCES
     
     "${CMAKE_SOURCE_DIR}/src/World/TileMap.cpp"
     
-    "${CMAKE_SOURCE_DIR}/src/Interface/Camera.cpp")
+    "${CMAKE_SOURCE_DIR}/src/Interface/Camera.cpp"
+
+    "${CMAKE_SOURCE_DIR}/src/Interface/Console.cpp"
+)
 
 # Include Directories
 list(APPEND INCLUDE_DIRS
