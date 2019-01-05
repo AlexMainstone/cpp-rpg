@@ -5,12 +5,13 @@
 class Camera {
     public:
         Camera(sf::View v = sf::View());
-        void handleEvent(sf::Event e);
+        void handleEventWithWindow(sf::Event e, sf::RenderWindow &window);
         sf::View getView();
     private:
         sf::View view;
 
+        float zoom;
         // Drag handling variables
         bool dragging;
-        sf::Vector2i drag_position;
+        sf::Vector2f drag_position;
 };

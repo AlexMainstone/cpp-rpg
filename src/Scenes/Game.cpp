@@ -5,17 +5,19 @@ Game::Game(sf::RenderWindow &window) : window(window), sheet("../res/sheets/tile
     camera = new Camera(window.getView());
     c = new Console(sf::Vector2f(5, 5));
     uiview = window.getView();
+
+	entity = new PlayerEntity();
 }
 
 void Game::handleEvent(sf::Event e) {
-    camera->handleEvent(e);
-    c->print("yo");
+    camera->handleEventWithWindow(e, window);
 }
 
 void Game::draw() {
     // Draw World
     window.setView(camera->getView());
     map->draw(window);
+    entity->draw(window);
 
     // Draw UI
     window.setView(uiview);
@@ -23,6 +25,7 @@ void Game::draw() {
 }
 
 void Game::update(sf::Time dt) {
+    entity->update(dt.asSeconds());
 }
 
 void Game::close() {

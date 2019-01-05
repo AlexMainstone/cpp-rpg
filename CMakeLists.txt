@@ -12,10 +12,13 @@ list(APPEND HEADERS
     
     "${CMAKE_SOURCE_DIR}/include/World/TileMap.hpp"
     
-    # Interface
     "${CMAKE_SOURCE_DIR}/include/Interface/Camera.hpp"
     "${CMAKE_SOURCE_DIR}/include/Interface/Console.hpp"
-)
+
+    "${CMAKE_SOURCE_DIR}/include/Entities/Entity.hpp"
+    "${CMAKE_SOURCE_DIR}/include/Entities/PlayerEntity.hpp"
+
+    "${CMAKE_SOURCE_DIR}/include/Components/AnimatedSprite.hpp")
 
 # Source Files
 list(APPEND SOURCES
@@ -27,10 +30,12 @@ list(APPEND SOURCES
     
     "${CMAKE_SOURCE_DIR}/src/World/TileMap.cpp"
     
-    # Interfaced
     "${CMAKE_SOURCE_DIR}/src/Interface/Camera.cpp"
     "${CMAKE_SOURCE_DIR}/src/Interface/Console.cpp"
-)
+
+    "${CMAKE_SOURCE_DIR}/src/Entities/PlayerEntity.cpp"
+
+    "${CMAKE_SOURCE_DIR}/src/Components/AnimatedSprite.cpp")
 
 # Include Directories
 list(APPEND INCLUDE_DIRS

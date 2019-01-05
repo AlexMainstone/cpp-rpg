@@ -4,7 +4,7 @@ Console::Console(sf::Vector2f pos) {
     position = pos;
     font.loadFromFile("../res/fonts/PressStart2P.ttf");
     text.setFont(font);
-    print("test");
+    print("PRION 0.0.1:");
     text.setPosition(pos);
     text.setCharacterSize(12);
 }
