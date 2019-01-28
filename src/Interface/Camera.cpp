@@ -1,4 +1,5 @@
 #include "Interface/Camera.hpp"
+#include <algorithm>
 
 Camera::Camera(sf::View v) {
     view = v;
@@ -15,6 +16,8 @@ void Camera::handleEventWithWindow(sf::Event e, sf::RenderWindow &window) {
     } else if(e.type == sf::Event::MouseButtonReleased) {
         dragging = false;
     } else if(e.type == sf::Event::MouseMoved) {
+        mouse_position.x = ((e.mouseMove.x + view.getCenter().x) / 16) * 16;
+        mouse_position.y = ((e.mouseMove.y + view.getCenter().y) / 16) * 16;
         if(dragging) {
             sf::Vector2f final_mouse = window.mapPixelToCoords(sf::Vector2i(e.mouseMove.x, e.mouseMove.y), view);
             view.setCenter(view.getCenter() + (drag_position - final_mouse));
@@ -31,7 +34,31 @@ void Camera::handleEventWithWindow(sf::Event e, sf::RenderWindow &window) {
                 view.zoom(1.5);
             }
         }
+    } else if(e.type == sf::Event::KeyPressed) {
+        if(e.key.code == sf::Keyboard::W) {
+            moving.y = -1;
+        } else if(e.key.code == sf::Keyboard::S) {
+            moving.y = 1;
+        } else if(e.key.code == sf::Keyboard::A) {
+            moving.x = -1;
+        } else if(e.key.code == sf::Keyboard::D) {
+            moving.x = 1;
+        }
+    } else if(e.type == sf::Event::KeyReleased) {
+        if(e.key.code == sf::Keyboard::W && moving.y != 1) {
+            moving.y = 0;
+        } else if(e.key.code == sf::Keyboard::S && moving.y != -1) {
+            moving.y = 0;
+        } else if(e.key.code == sf::Keyboard::A && moving.x != 1) {
+            moving.x = 0;
+        } else if(e.key.code == sf::Keyboard::D && moving.x != -1) {
+            moving.x = 0;
+        }
     }
+}
+
+void Camera::update(float dt) {
+    view.move((moving.x * dt) * 100, (moving.y * dt) * 100);
 }
 
 sf::View Camera::getView() {

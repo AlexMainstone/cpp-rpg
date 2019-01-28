@@ -5,5 +5,9 @@
         "**/lib": true,
         "**/res": true,
         "**/README.md": true
+    },
+    "files.associations": {
+        "new": "cpp",
+        "unordered_map": "cpp"
     }
 }

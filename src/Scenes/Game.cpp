@@ -6,11 +6,12 @@ Game::Game(sf::RenderWindow &window) : window(window), sheet("../res/sheets/tile
     c = new Console(sf::Vector2f(5, 5));
     uiview = window.getView();
 
-	entity = new PlayerEntity();
+	entity = new PlayerCharacter(map);
 }
 
 void Game::handleEvent(sf::Event e) {
     camera->handleEventWithWindow(e, window);
+    entity->handleEvent(e);
 }
 
 void Game::draw() {
@@ -25,6 +26,7 @@ void Game::draw() {
 }
 
 void Game::update(sf::Time dt) {
+    camera->update(dt.asSeconds());
     entity->update(dt.asSeconds());
 }
 

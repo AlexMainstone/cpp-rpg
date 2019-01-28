@@ -19,7 +19,12 @@ SpriteSheet::SpriteSheet(const char *path, int tiles_wide, int tiles_tall) {
     sprite.setTextureRect(sf::IntRect(0, 0, tile_width, tile_height));
 }
 
-void SpriteSheet::draw(int tile, sf::Vector2f pos, sf::RenderTarget &target) {
+void SpriteSheet::draw(int tile, sf::Vector2f pos, sf::RenderTarget &target, bool flipped) {
+    if(flipped) {
+        sprite.setScale(-1, 1);
+    } else {
+        sprite.setScale(1, 1);
+    }
     // Set the position in the world
     sprite.setPosition(pos);
 

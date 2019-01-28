@@ -8,10 +8,13 @@ AnimatedSprite::AnimatedSprite(int start, int end, float frametime, SpriteSheet 
    this->tile = 0;
    this->frame_time = frametime;
 
+    paused = false;
    this->sheet = sheet;
+    flipped = false;
 }
 
 void AnimatedSprite::update(float dt) {
+    if (paused) return;
     time_passed += dt;
     if(time_passed  > frame_time) {
         tile++;
@@ -23,5 +26,5 @@ void AnimatedSprite::update(float dt) {
 }
 
 void AnimatedSprite::draw(sf::Vector2f pos, sf::RenderTarget &target) {
-    sheet->draw(start + tile, pos, target);
+    sheet->draw(start + tile, pos, target, flipped);
 }

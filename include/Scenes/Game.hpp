@@ -5,7 +5,7 @@
 #include "Interface/Camera.hpp"
 #include "World/TileMap.hpp"
 #include "Interface/Console.hpp"
-#include "Entities/PlayerEntity.hpp"
+#include "Entities/Characters/PlayerCharacter.hpp"
 
 class Game : public Scene {
     public:
@@ -22,5 +22,5 @@ class Game : public Scene {
 
         Console *c;
         sf::View uiview;
-        PlayerEntity *entity;
+        PlayerCharacter *entity;
 };
