@@ -22,8 +22,8 @@ class TileMap {
             }
         };
 
-        const int WIDTH = 100;
-        const int HEIGHT = 100;
+        const int WIDTH = 30;
+        const int HEIGHT = 30;
         Tile *map[100][100];
         SpriteSheet &sheet;
 

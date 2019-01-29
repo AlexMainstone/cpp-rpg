@@ -4,7 +4,7 @@
 
 int main() {
     // Create the window
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "cpp-rpg");
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "cpp-rpg", sf::Style::Titlebar | sf::Style::Close);
 
     // The Active Scene
     Scene *scene = new Game(window);

@@ -16,10 +16,11 @@ void Camera::handleEventWithWindow(sf::Event e, sf::RenderWindow &window) {
     } else if(e.type == sf::Event::MouseButtonReleased) {
         dragging = false;
     } else if(e.type == sf::Event::MouseMoved) {
-        mouse_position.x = ((e.mouseMove.x + view.getCenter().x) / 16) * 16;
-        mouse_position.y = ((e.mouseMove.y + view.getCenter().y) / 16) * 16;
+        sf::Vector2f final_mouse = window.mapPixelToCoords(sf::Vector2i(e.mouseMove.x, e.mouseMove.y), view);
+        mouse_position.x = final_mouse.x / 16;
+        mouse_position.y = final_mouse.y / 16;
+
         if(dragging) {
-            sf::Vector2f final_mouse = window.mapPixelToCoords(sf::Vector2i(e.mouseMove.x, e.mouseMove.y), view);
             view.setCenter(view.getCenter() + (drag_position - final_mouse));
         }
     } else if(e.type == sf::Event::Resized) {

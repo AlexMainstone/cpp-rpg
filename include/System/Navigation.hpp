@@ -45,7 +45,9 @@
 
                         // if cheaper
                         if(dijkstra_map[current.x+dx][current.y+dy].cost == 0 || dijkstra_map[current.x + dx][current.y + dy].cost > dijkstra_map[current.x][current.y].cost + area[current.x + dx][current.y + dy]) {
-                            Node n(dijkstra_map[current.x][current.y].cost + area[current.x + dx][current.y + dy], current, current + sf::Vector2i(dx, dy));
+                            int diagonal = 0;
+                            if(dx != 0 && dy != 0) diagonal = 1;
+                            Node n((dijkstra_map[current.x][current.y].cost + area[current.x + dx][current.y + dy]) + diagonal, current, current + sf::Vector2i(dx, dy));
                             unsorted_nodes.push_back(n);
                             dijkstra_map[current.x + dx][current.y + dy] = n;
                             continue;

@@ -4,6 +4,7 @@ Game::Game(sf::RenderWindow &window) : window(window), sheet("../res/sheets/tile
     map = new TileMap(sheet);
     camera = new Camera(window.getView());
     c = new Console(sf::Vector2f(5, 5));
+    c->print("STARTED", sf::Color::Green);
     uiview = window.getView();
 
 	entity = new PlayerCharacter(map);
@@ -19,6 +20,8 @@ void Game::draw() {
     window.setView(camera->getView());
     map->draw(window);
     entity->draw(window);
+
+    entity->setCurrent(camera->getMousePosition());
 
     // Draw UI
     window.setView(uiview);

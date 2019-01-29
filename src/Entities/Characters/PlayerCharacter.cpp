@@ -17,6 +17,7 @@ void PlayerCharacter::update(float dt) {
             state = IDLE;
             animated_sprite->setPaused(true);
             dijkstra_map = map->navigate(sf::Vector2i(position.x, position.y), 19);
+            if(!path.empty()) {move(path.back().x*-1, path.back().y*-1); path.pop_back();}
         }
     }
     animated_sprite->update(dt);
@@ -28,6 +29,17 @@ void PlayerCharacter::handleEvent(sf::Event e) {
         else if(e.key.code == sf::Keyboard::Right) move(1, 0);
         else if(e.key.code == sf::Keyboard::Left) move(-1, 0);
         else if(e.key.code == sf::Keyboard::Down) move(0, 1);
+    }else if(e.type == sf::Event::MouseButtonPressed) {
+        if(e.mouseButton.button == sf::Mouse::Left) {
+            sf::Vector2i node = current;
+            if(dijkstra_map[node.x][node.y].cost == 0) return;
+            while(!(dijkstra_map[node.x][node.y].cost <= 0)) {
+                path.push_back(dijkstra_map[node.x][node.y].last_node - node);
+                node = dijkstra_map[node.x][node.y].last_node;
+            }
+            move(path.back().x*-1, path.back().y*-1);
+            path.pop_back();
+        }
     }
 }
 
@@ -59,6 +71,20 @@ void PlayerCharacter::drawMovement(sf::RenderTarget &target) {
             target.draw(rect);
         }
     }
+
+    rect.setFillColor(sf::Color::Red);
+    while(!(dijkstra_map[current.x][current.y].cost <= 0)) {
+        rect.setPosition(sf::Vector2f((current.x * 16) + (position.x * 16 - ((int)(19/2)*16)), (current.y * 16) + (position.y * 16 - ((int)(19/2)*16))));
+        target.draw(rect);
+        current = dijkstra_map[current.x][current.y].last_node;
+    }
+}
+
+void PlayerCharacter::setCurrent(sf::Vector2i c) {
+    sf::Vector2i current(c.x - position.x + (dijkstra_map.size()/2), c.y - position.y+(dijkstra_map.size()/2));
+    if(current.x < 0 || current.x >= dijkstra_map.size()) current.x = 0;
+    if(current.y < 0 || current.y >= dijkstra_map.size()) current.y = 0;
+    this->current = current;
 }
 
 void PlayerCharacter::draw(sf::RenderTarget &target) {

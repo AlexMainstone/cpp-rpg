@@ -12,6 +12,7 @@ class PlayerCharacter : public Character {
         void handleEvent(sf::Event e);
         void draw(sf::RenderTarget &target);
         void move(int x, int y);
+        void setCurrent(sf::Vector2i c);
     private:
         // Components
         AnimatedSprite *animated_sprite;
@@ -24,6 +25,10 @@ class PlayerCharacter : public Character {
             MOVING,
             IDLE
         };
+
+        sf::Vector2i current;
+
+        std::vector<sf::Vector2i> path;
 
         TileMap *map;
         States state;
