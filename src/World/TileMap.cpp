@@ -12,6 +12,10 @@ TileMap::TileMap(SpriteSheet &sheet) : sheet(sheet) {
         }
     }
     map[20][20] = tile2;
+    map[21][20] = tile2;
+    map[22][20] = tile2;
+    map[23][20] = tile2;
+    map[24][20] = tile2;
     map_texture.create(16*WIDTH, 16*HEIGHT);
     updateMap();
 }

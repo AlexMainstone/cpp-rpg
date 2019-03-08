@@ -14,6 +14,7 @@ list(APPEND HEADERS
     
     "${CMAKE_SOURCE_DIR}/include/Interface/Camera.hpp"
     "${CMAKE_SOURCE_DIR}/include/Interface/Console.hpp"
+    "${CMAKE_SOURCE_DIR}/include/Interface/Party.hpp"
 
     "${CMAKE_SOURCE_DIR}/include/Entities/Entity.hpp"
     "${CMAKE_SOURCE_DIR}/include/Entities/Characters/PlayerCharacter.hpp"
@@ -34,6 +35,7 @@ list(APPEND SOURCES
     
     "${CMAKE_SOURCE_DIR}/src/Interface/Camera.cpp"
     "${CMAKE_SOURCE_DIR}/src/Interface/Console.cpp"
+    "${CMAKE_SOURCE_DIR}/src/Interface/Party.cpp"
 
     "${CMAKE_SOURCE_DIR}/src/Entities/Characters/PlayerCharacter.cpp"
 

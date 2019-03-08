@@ -7,6 +7,12 @@ PlayerCharacter::PlayerCharacter(TileMap *map) : map(map) {
     move_range = 25;
     state = IDLE;
     dijkstra_map = map->navigate(sf::Vector2i(position.x, position.y), 19);
+    controlled = false;
+}
+
+
+void PlayerCharacter::setControlled(bool c) {
+    controlled = c;
 }
 
 void PlayerCharacter::update(float dt) {
@@ -23,14 +29,18 @@ void PlayerCharacter::update(float dt) {
     animated_sprite->update(dt);
 }
 
+#include<iostream>
 void PlayerCharacter::handleEvent(sf::Event e) {
+    if(!controlled) {return;}
+    
     if(e.type == sf::Event::KeyPressed) {
         if(e.key.code == sf::Keyboard::Up) move(0, -1);
         else if(e.key.code == sf::Keyboard::Right) move(1, 0);
         else if(e.key.code == sf::Keyboard::Left) move(-1, 0);
         else if(e.key.code == sf::Keyboard::Down) move(0, 1);
     }else if(e.type == sf::Event::MouseButtonPressed) {
-        if(e.mouseButton.button == sf::Mouse::Left) {
+        if(e.mouseButton.button == sf::Mouse::Left && state == IDLE) {
+            std::cout << current.x << ", " << current.y << std::endl;
             sf::Vector2i node = current;
             if(dijkstra_map[node.x][node.y].cost == 0) return;
             while(!(dijkstra_map[node.x][node.y].cost <= 0)) {
@@ -65,7 +75,7 @@ void PlayerCharacter::drawMovement(sf::RenderTarget &target) {
     rect.setSize(sf::Vector2f(16, 16));
     for(int i = 0; i < dijkstra_map.size(); i++) {
         for(int j = 0; j < dijkstra_map[i].size(); j++) {
-            if(dijkstra_map[i][j].cost == 0) continue;
+            if(dijkstra_map[i][j].cost == 0 || dijkstra_map[i][j].cost > 10) continue;
             rect.setPosition(sf::Vector2f((i * 16) + (position.x * 16 - ((int)(19/2)*16)), (j * 16) + (position.y * 16 - ((int)(19/2)*16))));
             rect.setFillColor(sf::Color(255 - (dijkstra_map[i][j].cost * 20), 255 - (dijkstra_map[i][j].cost * 20), 255 - (dijkstra_map[i][j].cost * 20)));
             target.draw(rect);
@@ -88,7 +98,7 @@ void PlayerCharacter::setCurrent(sf::Vector2i c) {
 }
 
 void PlayerCharacter::draw(sf::RenderTarget &target) {
-    if(state == IDLE) {
+    if(state == IDLE && controlled) {
         drawMovement(target);
     }
 

@@ -13,6 +13,7 @@ class PlayerCharacter : public Character {
         void draw(sf::RenderTarget &target);
         void move(int x, int y);
         void setCurrent(sf::Vector2i c);
+        void setControlled(bool c);
     private:
         // Components
         AnimatedSprite *animated_sprite;
@@ -21,6 +22,7 @@ class PlayerCharacter : public Character {
         void drawMovement(sf::RenderTarget &target);
 
         std::vector<std::vector<Node>> dijkstra_map;
+        bool controlled;
         enum States {
             MOVING,
             IDLE

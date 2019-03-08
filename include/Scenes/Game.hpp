@@ -6,6 +6,7 @@
 #include "World/TileMap.hpp"
 #include "Interface/Console.hpp"
 #include "Entities/Characters/PlayerCharacter.hpp"
+#include "Interface/Party.hpp"
 
 class Game : public Scene {
     public:
@@ -20,7 +21,8 @@ class Game : public Scene {
         TileMap *map;
         Camera *camera;
 
+        Party *party;
+
         Console *c;
         sf::View uiview;
-        PlayerCharacter *entity;
 };

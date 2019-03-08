@@ -6,6 +6,7 @@ Camera::Camera(sf::View v) {
     dragging = false;
     zoom = 0.2;
     view.zoom(zoom);
+    view.setCenter(0, 0);
 }
 
 void Camera::handleEventWithWindow(sf::Event e, sf::RenderWindow &window) {
