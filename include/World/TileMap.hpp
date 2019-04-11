@@ -3,30 +3,34 @@
 #include "../Resources/SpriteSheet.hpp"
 #include "System/Navigation.hpp"
 
-#include<vector>
+#include <vector>
 
-class TileMap {
-    public:
-        TileMap(SpriteSheet &sheet);
-        void draw(sf::RenderWindow &window);
-        int getCost(int x, int y);
-        void updateMap();
-        std::vector<std::vector<Node>> navigate(sf::Vector2i start, short radius);
-    private:
-        struct Tile {
-            short cost;
-            short tile;
-            Tile(short cost, short tile) {
-                this->cost = cost;
-                this->tile = tile;
-            }
-        };
+class TileMap
+{
+public:
+    TileMap(SpriteSheet &sheet);
+    void draw(sf::RenderWindow &window);
+    int getCost(int x, int y);
+    void updateMap();
+    std::vector<std::vector<Node>> navigate(sf::Vector2i start, short radius);
 
-        const int WIDTH = 30;
-        const int HEIGHT = 30;
-        Tile *map[100][100];
-        SpriteSheet &sheet;
+private:
+    struct Tile
+    {
+        short cost;
+        short tile;
+        Tile(short cost, short tile)
+        {
+            this->cost = cost;
+            this->tile = tile;
+        }
+    };
 
-        sf::RenderTexture map_texture;
-        sf::Sprite map_sprite;
+    const int WIDTH = 30;
+    const int HEIGHT = 30;
+    Tile *map[100][100];
+    SpriteSheet &sheet;
+
+    sf::RenderTexture map_texture;
+    sf::Sprite map_sprite;
 };

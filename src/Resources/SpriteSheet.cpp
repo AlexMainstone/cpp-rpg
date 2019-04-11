@@ -1,7 +1,7 @@
 #include "Resources/SpriteSheet.hpp"
 
-
-SpriteSheet::SpriteSheet(const char *path, int tiles_wide, int tiles_tall) {
+SpriteSheet::SpriteSheet(const char *path, int tiles_wide, int tiles_tall)
+{
     // Init variables
     this->tiles_wide = tiles_wide;
     this->tiles_tall = tiles_tall;
@@ -19,19 +19,23 @@ SpriteSheet::SpriteSheet(const char *path, int tiles_wide, int tiles_tall) {
     sprite.setTextureRect(sf::IntRect(0, 0, tile_width, tile_height));
 }
 
-void SpriteSheet::draw(int tile, sf::Vector2f pos, sf::RenderTarget &target, bool flipped) {
-    if(flipped) {
+void SpriteSheet::draw(int tile, sf::Vector2f pos, sf::RenderTarget &target, bool flipped)
+{
+    if (flipped)
+    {
         sprite.setScale(-1, 1);
-    } else {
+    }
+    else
+    {
         sprite.setScale(1, 1);
     }
     // Set the position in the world
     sprite.setPosition(pos);
 
     // Set pos of sprite on texture
-    sprite.setTextureRect(sf::IntRect((tile % tiles_wide) * tile_width, 
-            (tile / tiles_wide) * tile_height,
-            tile_width, tile_height));
+    sprite.setTextureRect(sf::IntRect((tile % tiles_wide) * tile_width,
+                                      (tile / tiles_wide) * tile_height,
+                                      tile_width, tile_height));
 
     // Draw
     target.draw(sprite);

@@ -8,21 +8,23 @@
 #include "Entities/Characters/PlayerCharacter.hpp"
 #include "Interface/Party.hpp"
 
-class Game : public Scene {
-    public:
-        Game(sf::RenderWindow &window);
-        void handleEvent(sf::Event e);
-        void draw();
-        void update(sf::Time dt);
-        void close();
-    private:
-        sf::RenderWindow &window;
-        SpriteSheet sheet;
-        TileMap *map;
-        Camera *camera;
+class Game : public Scene
+{
+public:
+    Game(sf::RenderWindow &window);
+    void handleEvent(sf::Event e);
+    void draw();
+    void update(sf::Time dt);
+    void close();
 
-        Party *party;
+private:
+    sf::RenderWindow &window;
+    SpriteSheet sheet;
+    TileMap *map;
+    Camera *camera;
 
-        Console *c;
-        sf::View uiview;
+    Party *party;
+
+    Console *c;
+    sf::View uiview;
 };

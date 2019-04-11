@@ -5,34 +5,37 @@
 #include "Components/AnimatedSprite.hpp"
 
 #include "World/TileMap.hpp"
-class PlayerCharacter : public Character {
-    public:
-        PlayerCharacter(TileMap *map);
-        void update(float dt);
-        void handleEvent(sf::Event e);
-        void draw(sf::RenderTarget &target);
-        void move(int x, int y);
-        void setCurrent(sf::Vector2i c);
-        void setControlled(bool c);
-    private:
-        // Components
-        AnimatedSprite *animated_sprite;
+class PlayerCharacter : public Character
+{
+public:
+    PlayerCharacter(TileMap *map);
+    void update(float dt);
+    void handleEvent(sf::Event e);
+    void draw(sf::RenderTarget &target);
+    void move(int x, int y);
+    void setCurrent(sf::Vector2i c);
+    void setControlled(bool c);
 
-        sf::Vector2f position;
-        void drawMovement(sf::RenderTarget &target);
+private:
+    // Components
+    AnimatedSprite *animated_sprite;
 
-        std::vector<std::vector<Node>> dijkstra_map;
-        bool controlled;
-        enum States {
-            MOVING,
-            IDLE
-        };
+    sf::Vector2f position;
+    void drawMovement(sf::RenderTarget &target);
 
-        sf::Vector2i current;
+    std::vector<std::vector<Node>> dijkstra_map;
+    bool controlled;
+    enum States
+    {
+        MOVING,
+        IDLE
+    };
 
-        std::vector<sf::Vector2i> path;
+    sf::Vector2i current;
 
-        TileMap *map;
-        States state;
-        sf::Vector2f target;
+    std::vector<sf::Vector2i> path;
+
+    TileMap *map;
+    States state;
+    sf::Vector2f target;
 };
